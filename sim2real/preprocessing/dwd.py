@@ -17,6 +17,8 @@ VALUE_STATIONS_FPATH = f"{paths.root}/helper_files/value_stations.txt"
 
 
 fnames = [
+    "BESCHREIBUNG_obsgermany_climate_hourly_tu_recent_de.pdf",
+    "DESCRIPTION_obsgermany_climate_hourly_tu_recent_en.pdf",
     "TU_Stundenwerte_Beschreibung_Stationen.txt",
     "stundenwerte_TU_00044_akt.zip",
     "stundenwerte_TU_00073_akt.zip",
