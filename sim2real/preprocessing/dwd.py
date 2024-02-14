@@ -1,6 +1,7 @@
 # %%
 from typing import Tuple
 import urllib.request
+import urllib.error
 import os
 import pandas as pd
 from tqdm import tqdm
@@ -15,8 +16,8 @@ from sim2real.datasets import DWDStationData, load_station_splits
 
 
 fnames = [
-    "BESCHREIBUNG_obsgermany_climate_hourly_tu_recent_de.pdf",
-    "DESCRIPTION_obsgermany_climate_hourly_tu_recent_en.pdf",
+#    "BESCHREIBUNG_obsgermany_climate_hourly_tu_recent_de.pdf",
+#    "DESCRIPTION_obsgermany_climate_hourly_tu_recent_en.pdf",
     "TU_Stundenwerte_Beschreibung_Stationen.txt",
     "stundenwerte_TU_00044_akt.zip",
     "stundenwerte_TU_00073_akt.zip",
@@ -545,7 +546,10 @@ def download_dwd():
             out_fpath = f"{unzipped_dir}/{fname}"
         if os.path.exists(out_fpath):
             continue
-        urllib.request.urlretrieve(url, out_fpath)
+        try:
+            urllib.request.urlretrieve(url, out_fpath)
+        except urllib.error.HTTPError as err:
+            print(err.code)
 
     print("Unzipping DWD data")
     for fname in tqdm(fnames):
@@ -894,8 +898,8 @@ def plot_train_val(train, val):
 
 
 if __name__ == "__main__":
-    datetime_split_plot()
-    # download_dwd()
+    # datetime_split_plot()
+    download_dwd()
     # process_dwd()
     # process_value_stations()
     # save_station_splits("random")
