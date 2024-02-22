@@ -611,6 +611,7 @@ def process_dwd():
     root = paths.raw_dwd
     for subdir in tqdm(os.listdir(root)):
         dir_path = f"{root}/{subdir}"
+        print(dir_path)
         if not os.path.isdir(dir_path):
             continue
 
@@ -633,7 +634,7 @@ def process_dwd():
     # Filter days with not enoungh data. (Mainly at the start of dataset period).
     counts = df.set_index(names.time).groupby(names.time).count()
     good_times = counts[counts[names.station_id] > 400].index.unique()
-    df = df[df[names.time].isin(good_times)].reset_index(drop=True)
+    #df = df[df[names.time].isin(good_times)].reset_index(drop=True)
 
     # cache for faster loading in future.
     ensure_dir_exists(paths.dwd)
@@ -899,8 +900,9 @@ def plot_train_val(train, val):
 
 if __name__ == "__main__":
     # datetime_split_plot()
-    download_dwd()
-    # process_dwd()
+    # download_dwd()
+    process_dwd()
     # process_value_stations()
     # save_station_splits("random")
+    # save_datetime_splits()
     # ss = load_station_splits()
