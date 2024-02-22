@@ -1,5 +1,6 @@
 sim2real/keys.py
 data/
+.idea
 .vscode
 outputs/
 *.DS_Store
