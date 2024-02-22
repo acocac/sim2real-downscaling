@@ -180,7 +180,7 @@ paths = Paths(
     dwd=f"{root}/data/processed/dwd/airtemp2m/dwd.feather",
     dwd_meta=f"{root}/data/processed/dwd/airtemp2m/dwd_meta.feather",
     dwd_test_stations=f"{root}/data/processed/dwd/value_stations.feather",
-    raw_era5=f"{root}/data/raw/ERA_5_Germany/1.grib",
+    raw_era5=f"{root}/data/raw/ERA_5_Germany",
     era5=f"{root}/data/processed/era5/era5_small.nc",
     raw_srtm=f"{root}/data/raw/srtm_dem/srtm_germany_dtm.tif",
     srtm=f"{root}/data/processed/srtm_dem/srtm_germany_dtm.nc",
@@ -196,9 +196,9 @@ data = DataSpec(
     bounds=Bounds(lat=(47.2, 54.95), lon=(5.8, 15.05)),
     crs_str="epsg:4326",
     epsg=4326,
-    train_dates=("2012-01-01", "2020-12-31"),
-    cv_dates=("2021-01-01", "2021-12-31"),
-    test_dates=("2022-01-01", "2022-12-31"),
+    train_dates=("2022-01-01", "2022-07-31"),
+    cv_dates=("2022-08-01", "2022-10-31"),
+    test_dates=("2023-11-01", "2023-12-31"),
     # This should be set in a way that ensures all times
     # of day are covered.
     val_freq="39H",
@@ -216,7 +216,7 @@ data = DataSpec(
 
 pretrain_opt = OptimSpec(
     seed=42,
-    device="cuda",
+    device="cpu",
     batch_size=16,
     batch_size_val=512,
     batches_per_epoch=200,
@@ -230,7 +230,7 @@ pretrain_opt = OptimSpec(
 
 tune_opt = OptimSpec(
     seed=42,
-    device="cuda",
+    device="cpu",
     batch_size=16,
     batch_size_val=512,
     batches_per_epoch=25,
