@@ -143,7 +143,7 @@ class TuneSpec:
 # Inferred from ERA5 data and pasted here.
 norm_params = {
     "coords": {
-        "time": {"name": "TIME"},
+        "time": {"name": "time"},
         "x1": {"name": "LAT", "map": (47.2, 54.95)},
         "x2": {"name": "LON", "map": (5.8, 15.05)},
     },
@@ -159,7 +159,7 @@ names = Names(
     height="HEIGHT",
     station_name="STATION_NAME",
     station_id="STATION_ID",
-    time="TIME",
+    time="time",
     train="TRAIN",
     val="VAL",
     test="TEST",
