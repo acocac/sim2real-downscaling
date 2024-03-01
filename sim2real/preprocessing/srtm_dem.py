@@ -16,7 +16,7 @@ def process_srtm():
             "y": names.lat,
         }
     )
-    elevation = elevation.sel(band=1).drop("band")
+    elevation = elevation.sel(band=1).drop_vars(["band", "spatial_ref"])
     elevation = elevation.rename({"band_data": names.height})
     ensure_dir_exists(paths.srtm)
     elevation.to_netcdf(paths.srtm)
