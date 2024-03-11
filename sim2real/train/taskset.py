@@ -30,6 +30,8 @@ class Taskset(Dataset):
         deterministic=False,
         frac_power=1,
         split=False,
+        remove_context_nans=False,
+        remove_target_nans=False
     ) -> None:
         """
         Must define either datetimes or time_range & freq.
@@ -50,6 +52,8 @@ class Taskset(Dataset):
         self.rng = np.random.default_rng(self.seed)
         self.frac_power = frac_power
         self.split = split
+        self.remove_context_nans = remove_context_nans
+        self.remove_target_nans = remove_target_nans
 
         if split:
             self.low, self.high = self.num_context[0]
@@ -95,6 +99,12 @@ class Taskset(Dataset):
             datewise_deterministic=self.deterministic,
             split_frac=split_frac,
         )
+
+        if self.remove_context_nans:
+            task = task.remove_context_nans()
+
+        if self.remove_target_nans:
+            task = task.remove_target_nans()
 
         return task
 
