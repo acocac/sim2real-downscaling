@@ -14,6 +14,8 @@ class Paths:
     dwd_test_stations: str
     raw_era5: str
     era5: str
+    lsm_raw: str
+    lsm_processed: str
     raw_srtm: str
     srtm: str
     station_split: str
@@ -142,33 +144,21 @@ class TuneSpec:
 
 # Inferred from ERA5 data and pasted here.
 norm_params = {
-    "HEIGHT": {"method": "min_max", "params": {"max": 2798.2248999999997, "min": 0.0}},
-    "T2M": {
+    "HEIGHT": {"method": "min_max", "params": {"max": 1245.0, "min": -6.0}},
+    "VWC": {
         "method": "mean_std",
-        "params": {"mean": 9.502816664564678, "std": 7.88809926879396},
-    },
-    "TPI_0.025": {
-        "method": "min_max",
-        "params": {"max": 1104.3115754206444, "min": -926.2898691203725},
-    },
-    "TPI_0.05": {
-        "method": "min_max",
-        "params": {"max": 1179.4161623897744, "min": -1045.8118006587536},
-    },
-    "TPI_0.1": {
-        "method": "min_max",
-        "params": {"max": 1414.6676017547015, "min": -1149.0056097925672},
+        "params": {'mean': 0.13129037618637085, 'std': 0.17807862162590027},
     },
     "coords": {
         "time": {"name": "time"},
-        "x1": {"map": (47.042083333333366, 55.958749999999995), "name": "LAT"},
-        "x2": {"map": (5.04125, 15.957916666666623), "name": "LON"},
+        "x1": {"map": (49.77000045776367, 60.77000045776367), "name": "LAT"},
+        "x2": {"map": (-7.550000190734863, 3.4499998092651367), "name": "LON"},
     },
 }
 
 
 names = Names(
-    temp="T2M",
+    temp="VWC",
     lat="LAT",
     lon="LON",
     height="HEIGHT",
@@ -191,32 +181,34 @@ root = str(Path(__file__).parent.parent.resolve())
 
 paths = Paths(
     root=root,
-    raw_dwd=f"{root}/data/raw/dwd/airtemp2m/unzipped",
-    dwd=f"{root}/data/processed/dwd/airtemp2m/dwd.feather",
-    dwd_meta=f"{root}/data/processed/dwd/airtemp2m/dwd_meta.feather",
-    dwd_test_stations=f"{root}/data/processed/dwd/value_stations.feather",
-    raw_era5=f"{root}/data/raw/ERA_5_Germany/1.grib",
-    era5=f"{root}/data/processed/era5/era5_small.nc",
-    raw_srtm=f"{root}/data/raw/srtm_dem/srtm_germany_dtm.tif",
-    srtm=f"{root}/data/processed/srtm_dem/srtm_germany_dtm.nc",
-    station_split=f"{root}/data/processed/splits/stations.feather",
-    time_split=f"{root}/data/processed/splits/times.feather",
+    raw_dwd=f"{root}/data/uk/hourly/raw",
+    dwd=f"{root}/data/uk/hourly/processed/tdt1/tdt1.feather",
+    dwd_meta=f"{root}/data/uk/hourly/processed/tdt1/tdt1_meta.feather",
+    dwd_test_stations=f"{root}/data/uk/hourly/processed/tdt1/tdt1_test.feather",
+    raw_era5=f"{root}/data/uk/hourly/raw/era5/swval1.nc",
+    era5=f"{root}/data/uk/hourly/processed/era5/swval1.nc",
+    lsm_raw=f"{root}/data/uk/hourly/raw/era5/lsm.nc",
+    lsm_processed=f"{root}/data/uk/hourly/processed/era5/lsm.nc",
+    raw_srtm=f"{root}/data/uk/hourly/raw/dtm/srtm_dtm.tif",
+    srtm=f"{root}/data/uk/hourly/processed/srtm_dem/srtm.nc",
+    station_split=f"{root}/data/uk/hourly/processed/splits/stations.feather",
+    time_split=f"{root}/data/uk/hourly/processed/splits/times.feather",
     out=f"{root}/_outputs",
     test_results=f"{root}/_outputs/test_results.csv",
     active_learning_dir=f"{root}/_outputs/active_learning/",
-    shapefile=f"{root}/helper_files/shapefiles/DEU_adm0.shp",
+    shapefile=f"{root}/data/uk/shapefiles/GBR_adm0.shp",
 )
 
 data = DataSpec(
-    bounds=Bounds(lat=(47.2, 54.95), lon=(5.8, 15.05)),
+    bounds=Bounds(lat=(49.77000045776367, 60.77000045776367), lon=(-7.550000190734863, 3.4499998092651367)),
     crs_str="epsg:4326",
     epsg=4326,
-    train_dates=("2012-01-01", "2020-12-31"),
-    cv_dates=("2021-01-01", "2021-12-31"),
+    train_dates=("2012-01-01", "2012-02-01"),
+    cv_dates=("2021-01-01", "2021-01-02"),
     test_dates=("2022-01-01", "2022-12-31"),
     # This should be set in a way that ensures all times
     # of day are covered.
-    val_freq="39H",
+    val_freq="1H",
     era5_context=(1, 500),
     era5_target="all",
     era5_interpolation=False,
@@ -231,7 +223,7 @@ data = DataSpec(
 
 pretrain_opt = OptimSpec(
     seed=42,
-    device="cuda",
+    device="cpu",
     batch_size=16,
     batch_size_val=512,
     batches_per_epoch=200,
@@ -245,7 +237,7 @@ pretrain_opt = OptimSpec(
 
 tune_opt = OptimSpec(
     seed=42,
-    device="cuda",
+    device="cpu",
     batch_size=16,
     batch_size_val=512,
     batches_per_epoch=100,
