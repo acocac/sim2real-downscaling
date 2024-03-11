@@ -15,7 +15,7 @@ from sim2real.utils import exp_dir_sim, ensure_exists
 from sim2real.plots import save_plot
 from sim2real import plots
 
-from sim2real.datasets import load_elevation, load_era5
+from sim2real.datasets import load_elevation, load_era5, load_lsm
 from sim2real.train.taskset import Taskset
 from sim2real.train.trainer import Trainer
 
@@ -102,7 +102,7 @@ class SimTrainer(Trainer):
         )
         self.task_loader = tl
 
-        def taskset(dates, freq, deterministic):
+        def taskset(dates, freq, deterministic, remove_context_nans, remove_target_nans):
             return Taskset(
                 tl,
                 c_points,
@@ -113,11 +113,13 @@ class SimTrainer(Trainer):
                 deterministic=deterministic,
                 split=self.data.era5_split,
                 frac_power=self.data.frac_power,
+                remove_context_nans=remove_context_nans,
+                remove_target_nans=remove_target_nans
             )
 
-        train_set = taskset(self.data.train_dates, "H", False)
-        val_set = taskset(self.data.cv_dates, self.data.val_freq, True)
-        test_set = taskset(self.data.test_dates, self.data.val_freq, True)
+        train_set = taskset(self.data.train_dates, "H", False, True, True)
+        val_set = taskset(self.data.cv_dates, self.data.val_freq, True, True, True)
+        test_set = taskset(self.data.test_dates, self.data.val_freq, True, True, True)
         return train_set, val_set, test_set
 
     def _add_var(
@@ -142,10 +144,12 @@ class SimTrainer(Trainer):
         if task is None:
             task = self.sample_tasks[0]
 
-        prediction = self.model.predict(task, X_t=self._plot_X_t())[names.temp]
+        era5_lsm = load_lsm()['surface']
+
+        prediction = self.model.predict(task, X_t=self._plot_X_t(), X_t_mask=era5_lsm)[names.temp]
         mean_ds, std_ds = prediction["mean"], prediction["std"]
 
-        prediction = self.model.predict(task, X_t=self.aux_raw)[names.temp]
+        prediction = self.model.predict(task, X_t=self.aux_raw, X_t_mask=era5_lsm)[names.temp]
         mean_ds_dense, std_ds_dense = prediction["mean"], prediction["std"]
 
         coord_map = {
