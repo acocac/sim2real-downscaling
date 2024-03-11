@@ -288,6 +288,8 @@ def load_era5():
     else:
         return xr.load_dataset(paths.era5, engine="cfgrib")
 
+def load_lsm():
+    return xr.load_dataset(paths.lsm_processed)
 
 def load_elevation():
     return xr.load_dataset(paths.srtm)
