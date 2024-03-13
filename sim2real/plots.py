@@ -75,14 +75,14 @@ def init_fig(nrows=1, ncols=1, figsize=(4, 4), ret_transform=False):
     axs = np.array(axs).flatten()
 
     for ax in axs:
-        add_germany_lines(ax)
+        add_adm_lines(ax)
 
     if ret_transform:
         return fig, axs, ccrs.PlateCarree()
     return fig, axs
 
 
-def add_germany_lines(ax):
+def add_adm_lines(ax):
     bounds = [*data.bounds.lon, *data.bounds.lat]
     ax.set_extent(bounds, crs=ccrs.PlateCarree())
     ax.add_feature(feature.BORDERS, linewidth=0.25)
