@@ -120,7 +120,7 @@ def plot_era5_prediction(
         vmax=vmax,
     )
     axs[1].set_title("ConvNP mean")
-    std_data.plot(cmap="Greys", ax=axs[2], transform=ccrs.PlateCarree())
+    std_data.plot(cmap="Greys", ax=axs[2], transform=ccrs.PlateCarree(), center=False)
     axs[2].set_title("ConvNP std dev")
     error_data.plot(cmap="seismic", ax=axs[3], transform=ccrs.PlateCarree())
     axs[3].set_title("ConvNP error")
