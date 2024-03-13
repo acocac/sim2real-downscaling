@@ -9,7 +9,7 @@ import pandas as pd
 import geopandas as gpd
 import cartopy.crs as ccrs
 import cartopy.feature as feature
-from sim2real.config import paths, names, data
+from sim2real.config import paths, names, data, out
 
 import matplotlib
 
@@ -67,7 +67,7 @@ def init_fig(nrows=1, ncols=1, figsize=(4, 4), ret_transform=False):
     """
     Generate a figure configured with a basic map of germany.
     """
-    proj = ccrs.TransverseMercator(central_longitude=10, approx=False)
+    proj = out.fig_crs
     fig, axs = plt.subplots(
         subplot_kw={"projection": proj}, nrows=nrows, ncols=ncols, figsize=figsize
     )
@@ -101,7 +101,7 @@ def adjust_plot(fig=None, axs=None):
 def plot_era5_prediction(
     era5_data, mean_data, std_data, error_data, data_processor, task
 ):
-    proj = ccrs.TransverseMercator(central_longitude=10, approx=False)
+    proj = out.fig_crs
     fig, axs = plt.subplots(
         subplot_kw={"projection": proj}, nrows=1, ncols=4, figsize=(10, 2.5)
     )
