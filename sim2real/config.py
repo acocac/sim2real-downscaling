@@ -27,6 +27,24 @@ class Paths:
 
 
 @dataclass
+class Pathsger:
+    root: str
+    raw_dwd: str
+    dwd: str
+    dwd_meta: str
+    dwd_test_stations: str
+    raw_era5: str
+    era5: str
+    raw_srtm: str
+    srtm: str
+    station_split: str
+    time_split: str
+    out: str
+    test_results: str
+    active_learning_dir: str
+    shapefile: str
+
+@dataclass
 class Bounds:
     lat: Tuple[float, float]
     lon: Tuple[float, float]
@@ -199,6 +217,24 @@ paths = Paths(
     shapefile=f"{root}/data/uk/shapefiles/GBR_adm0.shp",
 )
 
+paths_germany = Pathsger(
+    root=root,
+    raw_dwd=f"{root}/data/germany/hourly/raw/dwd/airtemp2m/unzipped",
+    dwd=f"{root}/data/germany/hourly/processed/dwd/airtemp2m/dwd.feather",
+    dwd_meta=f"{root}/data/germany/hourly/processed/dwd/airtemp2m/dwd_meta.feather",
+    dwd_test_stations=f"{root}/data/germany/hourly/processed/dwd/value_stations.feather",
+    raw_era5=f"{root}/data/germany/hourly/raw/ERA_5_Germany/1.grib",
+    era5=f"{root}/data/germany/hourly/processed/era5/era5_small.nc",
+    raw_srtm=f"{root}/data/germany/hourly/raw/SRTM_DEM/srtm_germany_dtm.tif",
+    srtm=f"{root}/data/germany/hourly/processed/srtm_dem/srtm_germany_dtm.nc",
+    station_split=f"{root}/data/germany/hourly/processed/splits/stations.feather",
+    time_split=f"{root}/data/germany/hourly/processed/splits/times.feather",
+    out=f"{root}/_outputs",
+    test_results=f"{root}/_outputs/test_results.csv",
+    active_learning_dir=f"{root}/_outputs/active_learning/",
+    shapefile=f"{root}/helper_files/shapefiles/DEU_adm0.shp",
+)
+
 data = DataSpec(
     bounds=Bounds(lat=(49.77000045776367, 60.77000045776367), lon=(-7.550000190734863, 3.4499998092651367)),
     crs_str="epsg:4326",
@@ -209,6 +245,28 @@ data = DataSpec(
     # This should be set in a way that ensures all times
     # of day are covered.
     val_freq="1H",
+    era5_context=(1, 500),
+    era5_target="all",
+    era5_interpolation=False,
+    # This doesn't work until later.
+    era5_split=False,
+    dwd_context=(0.0, 1.0),
+    dwd_target="all",
+    norm_params=norm_params,
+    # How much should sparse tasks be preferred? Larger => more sparse tasks.
+    frac_power=2,
+)
+
+datager = DataSpec(
+    bounds=Bounds(lat=(47.2, 54.95), lon=(5.8, 15.05)),
+    crs_str="epsg:4326",
+    epsg=4326,
+    train_dates=("2012-01-01", "2020-12-31"),
+    cv_dates=("2021-01-01", "2021-12-31"),
+    test_dates=("2022-01-01", "2022-12-31"),
+    # This should be set in a way that ensures all times
+    # of day are covered.
+    val_freq="39H",
     era5_context=(1, 500),
     era5_target="all",
     era5_interpolation=False,
@@ -273,7 +331,7 @@ out = OutputSpec(
     wandb=True,
     plots=True,
     wandb_name=None,
-    fig_crs=ccrs.TransverseMercator(central_longitude=10, approx=False),
+    fig_crs=ccrs.PlateCarree(),
     data_crs=ccrs.PlateCarree(),
     # Must be part of test dates.
     sample_dates=["2022-03-01 08:00:00", "2022-01-02 04:00:00"],
