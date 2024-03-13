@@ -270,6 +270,7 @@ class Trainer(ABC):
             encoder_scales_learnable=self.mspec.encoder_scales_learnable,
             decoder_scale_learnable=self.mspec.decoder_scale_learnable,
             aux_t_mlp_layers=self.mspec.aux_t_mlp_layers,
+            transform=self.mspec.transform
         )
 
         model = ConvNP(self.data_processor, self.task_loader, **model_kwargs)

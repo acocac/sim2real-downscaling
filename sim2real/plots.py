@@ -103,7 +103,7 @@ def plot_era5_prediction(
 ):
     proj = out.fig_crs
     fig, axs = plt.subplots(
-        subplot_kw={"projection": proj}, nrows=1, ncols=4, figsize=(10, 2.5)
+        subplot_kw={"projection": proj}, nrows=1, ncols=4, figsize=(15, 4)
     )
 
     era5_plot = era5_data.plot(cmap="seismic", ax=axs[0], transform=ccrs.PlateCarree())
