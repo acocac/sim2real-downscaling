@@ -17,6 +17,7 @@ from deepsensor import context_encoding
 from deepsensor.data.loader import TaskLoader
 from deepsensor.model.convnp import ConvNP
 from deepsensor.plot import receptive_field, offgrid_context
+from deepsensor.train.train import train_epoch
 from sim2real.datasets import load_elevation
 from sim2real.train.taskset import Taskset
 
@@ -226,6 +227,15 @@ class Trainer(ABC):
             self.plot_sample_tasks(0)
 
         for epoch in self.pbar:
+
+            # try:
+            #     task = next(train_iter)
+            # except StopIteration:
+            #     train_iter = iter(self.train_loader)
+            #     task = next(train_iter)
+            #
+            # batch_losses = train_epoch(self.model, task, opt=self.optimiser, batch_size=None)
+
             batch_losses = []
             for i in range(self.opt.batches_per_epoch):
                 # Usually one epoch would be going through the whole dataset.
