@@ -401,7 +401,7 @@ class Sim2RealTrainer(Trainer):
 
         self.mean = mean_ds
 
-        proj = ccrs.TransverseMercator(central_longitude=10, approx=False)
+        proj = out.fig_crs
 
         fig, axs = plt.subplots(
             subplot_kw={"projection": proj},
@@ -435,7 +435,7 @@ class Sim2RealTrainer(Trainer):
             vmax=vmax,
             extend="both",
         )
-        axs[1].set_title("Pred. Mean [°C]")
+        axs[1].set_title("Pred. Mean [m**3 m**-3]")
 
         im = std_ds.plot(
             cmap="viridis_r",
@@ -443,9 +443,9 @@ class Sim2RealTrainer(Trainer):
             transform=transform,
             extend="both",
         )
-        axs[2].set_title("Pred Std. Dev. [°C]")
+        axs[2].set_title("Pred Std. Dev. [m**3 m**-3]")
 
-        axs[3].set_title("Prediction Error [°C]")
+        axs[3].set_title("Prediction Error [m**3 m**-3]")
 
         biggest_err = err_da.abs().max()
         im = axs[3].scatter(
