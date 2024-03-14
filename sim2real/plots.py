@@ -106,9 +106,10 @@ def plot_era5_prediction(
         subplot_kw={"projection": proj}, nrows=1, ncols=4, figsize=(15, 4)
     )
 
-    era5_plot = era5_data.plot(cmap="seismic", ax=axs[0], transform=ccrs.PlateCarree())
+    era5_plot = era5_data.plot(cmap="seismic", ax=axs[0], transform=ccrs.PlateCarree(), vmin = 0)
     cbar = era5_plot.colorbar
     vmin, vmax = cbar.vmin, cbar.vmax
+    vmin = 0
 
     axs[0].set_title("ERA5")
 
