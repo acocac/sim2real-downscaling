@@ -280,7 +280,7 @@ datager = DataSpec(
 
 pretrain_opt = OptimSpec(
     seed=42,
-    device="cpu",
+    device="cuda",
     batch_size=16,
     batch_size_val=512,
     batches_per_epoch=200,
@@ -294,7 +294,7 @@ pretrain_opt = OptimSpec(
 
 tune_opt = OptimSpec(
     seed=42,
-    device="cpu",
+    device="cuda",
     batch_size=16,
     batch_size_val=512,
     batches_per_epoch=100,
