@@ -239,7 +239,7 @@ data = DataSpec(
     crs_str="epsg:4326",
     epsg=4326,
     train_dates=("2012-01-01", "2012-02-01"),
-    cv_dates=("2021-01-01", "2021-01-02"),
+    cv_dates=("2021-01-01", "2021-12-31"),
     test_dates=("2022-01-01", "2022-12-31"),
     # This should be set in a way that ensures all times
     # of day are covered.
