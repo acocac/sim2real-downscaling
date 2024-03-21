@@ -238,7 +238,7 @@ data = DataSpec(
     bounds=Bounds(lat=(49.77000045776367, 60.77000045776367), lon=(-7.550000190734863, 3.4499998092651367)),
     crs_str="epsg:4326",
     epsg=4326,
-    train_dates=("2012-01-01", "2012-02-01"),
+    train_dates=("2012-01-01", "2020-12-31"),
     cv_dates=("2021-01-01", "2021-12-31"),
     test_dates=("2022-01-01", "2022-12-31"),
     # This should be set in a way that ensures all times
