@@ -244,7 +244,7 @@ data = DataSpec(
     test_dates=("2022-01-01", "2022-12-31"),
     # This should be set in a way that ensures all times
     # of day are covered.
-    val_freq="1H",
+    val_freq="39H",
     era5_context=(1, 500),
     era5_target="all",
     era5_interpolation=False,
