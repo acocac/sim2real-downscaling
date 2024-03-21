@@ -310,7 +310,7 @@ tune_opt = OptimSpec(
 opt = tune_opt
 
 # ppu = 200  # Found from dwd.compute_ppu()
-ppu = 150
+ppu = 109 #from internal_density in deepsensor
 model = ModelSpec(
     unet_channels=(96,) * 6,
     aux_t_mlp_layers=(96, 96, 96),
