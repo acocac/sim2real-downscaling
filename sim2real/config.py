@@ -165,7 +165,7 @@ norm_params = {
     "HEIGHT": {"method": "min_max", "params": {"max": 1245.0, "min": -6.0}},
     "VWC": {
         "method": "mean_std",
-        "params": {'mean': 0.13129037618637085, 'std': 0.17807862162590027},
+        "params": {'mean': 0.3290455639362335, 'std': 0.12027376145124435},
     },
     "coords": {
         "time": {"name": "time"},
@@ -173,7 +173,6 @@ norm_params = {
         "x2": {"map": (-7.550000190734863, 3.4499998092651367), "name": "LON"},
     },
 }
-
 
 names = Names(
     temp="VWC",
