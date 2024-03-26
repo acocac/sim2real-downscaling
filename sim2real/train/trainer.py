@@ -361,6 +361,26 @@ class Trainer(ABC):
 
         aux = aux.coarsen(coarsen, boundary="trim").mean()
 
+        return aux, "all"
+
+    def _add_aux_elev(
+        self, res_factor=1.0
+    ) -> Tuple[Union[xr.DataArray, pd.Series], Union[float, int, str]]:
+        def _coarsen(high_res):
+            """
+            Coarsen factor for shrinking something high-res to PPU resolution.
+            """
+            factor = len(high_res) // (res_factor * self.mspec.ppu)
+            return int(factor)
+
+        aux = load_elevation()
+        coarsen = {
+            names.lat: _coarsen(aux[names.lat]),
+            names.lon: _coarsen(aux[names.lon]),
+        }
+
+        aux = aux.coarsen(coarsen, boundary="trim").mean()
+
         # mask values outside of land
         lsm = load_lsm()
         lsm = lsm.interp_like(aux, method='nearest')
