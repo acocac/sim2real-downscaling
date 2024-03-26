@@ -390,7 +390,7 @@ class Sim2RealTrainer(Trainer):
         err_da = mean_ds - truth
         err_da = err_da.dropna()
 
-        high_res_df = self._add_aux(res_factor=res_factor)[0].to_dataframe()
+        high_res_df = self._add_aux(res_factor=res_factor)[0].to_dataframe().dropna()
         # Higher resolution prediction everywhere.
         prediction = self.model.predict(task, X_t=high_res_df, resolution_factor=1)[
             names.temp
