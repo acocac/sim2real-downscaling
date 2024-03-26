@@ -18,7 +18,7 @@ from deepsensor.data.loader import TaskLoader
 from deepsensor.model.convnp import ConvNP
 from deepsensor.plot import receptive_field, offgrid_context
 from deepsensor.train.train import train_epoch
-from sim2real.datasets import load_elevation
+from sim2real.datasets import load_elevation, load_lsm
 from sim2real.train.taskset import Taskset
 
 from sim2real.utils import (
@@ -360,6 +360,13 @@ class Trainer(ABC):
         }
 
         aux = aux.coarsen(coarsen, boundary="trim").mean()
+
+        # mask values outside of land
+        lsm = load_lsm()
+        lsm = lsm.interp_like(aux, method='nearest')
+
+        aux = aux.where(lsm['surface'], np.nan)
+
         return aux, "all"
 
     @abstractmethod
