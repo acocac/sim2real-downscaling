@@ -359,7 +359,7 @@ class Sim2RealTrainer(Trainer):
 
         tasks = []
         for dt in self.out.sample_dates:
-            dt = pd.to_datetime(dt)
+            dt = pd.to_datetime(dt).tz_localize('UTC')
             if dt not in valid_dates:
                 print(f"Warning: {dt} not in test set for sample tasks. Falling back.")
                 tasks.append(self.test_set[0])
