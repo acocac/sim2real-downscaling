@@ -333,7 +333,7 @@ out = OutputSpec(
     fig_crs=ccrs.PlateCarree(),
     data_crs=ccrs.PlateCarree(),
     # Must be part of test dates.
-    sample_dates=["2022-03-01 08:00:00", "2022-01-02 04:00:00"],
+    sample_dates=["2022-03-25 10:00:00", "2022-09-18 08:00:00"],
     spatiotemp_vals=False,
     test_metrics=True,
     era5_metric=False,
