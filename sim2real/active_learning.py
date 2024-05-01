@@ -135,7 +135,7 @@ def placement_plot(
 # %%
 
 if __name__ == "__main__":
-    nums_stations = [500, 20]
+    nums_stations = [51, 20]
 
     e = Evaluator(paths, opt, out, data, model, tune, 1024, False)
     for num_stations in nums_stations:
