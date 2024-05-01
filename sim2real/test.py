@@ -231,7 +231,7 @@ class Evaluator(Sim2RealTrainer):
         return task_losses
 
     def loss_fn(self, task, num_lv_samples=8, normalise=False, added_var=0.0):
-        task = ConvNP.check_task(task)
+        task = ConvNP.modify_task(task)
         context_data, xt, yt, model_kwargs = convert_task_to_nps_args(task)
 
         logpdfs = loglik(
@@ -314,9 +314,9 @@ class Evaluator(Sim2RealTrainer):
         self.val_stations = val_stations
         self.test_stations = test_stations
 
-        print("test checksum: ", sum(test_stations))
-        print("val checksum: ", sum(val_stations))
-        print("train checksum: ", sum(train_stations))
+        print("test checksum: ", len(test_stations))
+        print("val checksum: ", len(val_stations))
+        print("train checksum: ", len(train_stations))
 
         self.test_set = self.gen_trainset(
             train_stations + val_stations,
@@ -374,7 +374,7 @@ class Evaluator(Sim2RealTrainer):
         idx = 0 if self.res.empty else self.res.index.max() + 1
         self.res.loc[idx] = record
 
-    def _init_weights(self, tspec, which="best"):
+    def _init_weights(self, tspec, which="latest"):
         exp_dir = exp_dir_sim2real(self.mspec, tspec)
         best_path = f"{weight_dir(exp_dir)}/{which}.h5"
 
