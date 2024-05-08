@@ -415,7 +415,7 @@ class Sim2RealTrainer(Trainer):
 
         s = 3**2
 
-        axs[0].set_title("Truth [°C]")
+        axs[0].set_title("Truth")
         im = axs[0].scatter(
             *lons_and_lats(truth),
             s=s,
@@ -435,24 +435,24 @@ class Sim2RealTrainer(Trainer):
             vmax=vmax,
             extend="both",
         )
-        axs[1].set_title("Pred. Mean [m**3 m**-3]")
+        axs[1].set_title("Mean")
 
         im = std_ds.plot(
-            cmap="viridis_r",
+            cmap="Greys",
             ax=axs[2],
             transform=transform,
             extend="both",
         )
-        axs[2].set_title("Pred Std. Dev. [m**3 m**-3]")
+        axs[2].set_title("Std. Dev.")
 
-        axs[3].set_title("Prediction Error [m**3 m**-3]")
+        axs[3].set_title("Error")
 
         biggest_err = err_da.abs().max()
         im = axs[3].scatter(
             *lons_and_lats(err_da),
             s=s,
             c=err_da,
-            cmap="seismic",
+            cmap="seismic_r",
             vmin=-biggest_err,
             vmax=biggest_err,
             transform=transform,
