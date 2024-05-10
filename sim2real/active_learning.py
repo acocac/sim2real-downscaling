@@ -91,6 +91,7 @@ def active_learning_run(e, num_stations, tuned):
     )
 
     test_tasks = [e.test_set[i] for i in range(50)]
+    [test_tasks[i].update({'time': test_tasks[i]["time"].to_datetime64()}) for i in range(len(test_tasks))] #quick fix to error with dates, wo modifying deepsensor codebase
 
     # acquisition_fn = Stddev(e.model)
     acquisition_fn = MeanStddev(e.model)
