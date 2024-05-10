@@ -87,6 +87,7 @@ def active_learning_run(e, num_stations, tuned):
         X_s_mask=ger_mask(X_s),
         X_t_mask=ger_mask(X_t),
         N_new_context=5,
+        task_loader=test_taskset.task_loader,
     )
 
     test_tasks = [e.test_set[i] for i in range(50)]
