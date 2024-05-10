@@ -100,7 +100,7 @@ def active_learning_run(e, num_stations, tuned):
     else:
         minmax = "min"
 
-    X_new_df, acquisition_fn_ds = greedy_alg(acquisition_fn, test_tasks, minmax)
+    X_new_df, acquisition_fn_ds = greedy_alg(acquisition_fn, test_tasks)
 
     save_X_new_df(X_new_df, num_stations, tuned)
     save_acq_ds(acquisition_fn_ds, num_stations, tuned)
