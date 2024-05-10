@@ -338,7 +338,7 @@ class Evaluator(Sim2RealTrainer):
             deterministic=True,
         )
 
-        return self._to_dataloader(self.test_set, self.num_samples)
+        return self.test_set, self._to_dataloader(self.test_set, self.num_samples)
 
     def _set_result(self, tspec: TuneSpec, key, val):
         self._set_result_inner(
