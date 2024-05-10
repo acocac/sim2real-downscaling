@@ -75,7 +75,7 @@ def active_learning_run(e, num_stations, tuned):
         e._init_weights(t)
     else:
         e._init_weights_era5_baseline()
-    e.test_loader = e._init_testloader(t)
+    test_taskset, e.test_loader = e._init_testloader(t)
 
     X_t = e.raw_aux
     X_s = e.raw_aux.coarsen({"LAT": 7, "LON": 7}, boundary="trim").mean()
@@ -271,10 +271,10 @@ if __name__ == "__main__":
 #     fig.suptitle(
 #         f"$N_{{stations}} = {num_stations}$", horizontalalignment="left", x=0.15, y=0.97
 #     )
-#     save_plot(None, f"sensor_placement_N_stat_{num_stations}", fig=fig)
+#     save_plot(paths.active_learning_dir, f"sensor_placement_N_stat_{num_stations}", fig=fig)
 #
 #
-# for num_stations in [20, 500]:
+# for num_stations in [20, 51]:
 #     station_placement_plot(num_stations)
 # # %%
 # e.plot_train_val()
