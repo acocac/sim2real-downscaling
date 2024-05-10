@@ -135,21 +135,23 @@ def placement_plot(
 
 
 # %%
+#
+# if __name__ == "__main__":
+#     nums_stations = [51, 20]
+#
+#     e = Evaluator(paths, opt, out, data, model, tune, 1024, False)
+#     for num_stations in nums_stations:
+#         for tuned in [True, False]:
+#             print(f"N Stations = {num_stations}, Tuned = {tuned}")
+#             active_learning_run(e, num_stations, tuned)
+# %%
+num_stations = 51
+tuned = True
+e = Evaluator(paths, opt, out, data, model, tune, 1024, False)
+active_learning_run(e, num_stations, tuned)
 
-if __name__ == "__main__":
-    nums_stations = [51, 20]
+# %%
 
-    e = Evaluator(paths, opt, out, data, model, tune, 1024, False)
-    for num_stations in nums_stations:
-        for tuned in [True, False]:
-            print(f"N Stations = {num_stations}, Tuned = {tuned}")
-            active_learning_run(e, num_stations, tuned)
-# # %%
-# e = Evaluator(paths, opt, out, data, model, tune, 1024, False)
-#
-#
-# # %%
-#
 # fig, axs, crs = init_fig(ret_transform=True)
 # placement_plot(e.test_set[0], X_new_df, e.data_processor, out.data_crs, ax=axs[0])
 # #
