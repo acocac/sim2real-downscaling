@@ -96,7 +96,7 @@ class SimTrainer(Trainer):
         tl = TaskLoader(
             context=context,
             target=target,
-            time_freq="H",
+            time_freq="h",
             discrete_xarray_sampling=not self.data.era5_interpolation,
             aux_at_targets=aux_at_targets,
         )

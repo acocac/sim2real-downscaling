@@ -182,7 +182,7 @@ class Sim2RealTrainer(Trainer):
         tl = TaskLoader(
             context=[c_df, aux],
             target=t_df,
-            time_freq="H",
+            time_freq="h",
             discrete_xarray_sampling=not self.data.era5_interpolation,
             aux_at_targets=aux_at_targets,
             links=[(0, 0)],
