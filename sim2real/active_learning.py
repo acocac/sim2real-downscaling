@@ -216,7 +216,7 @@ active_learning_run(e, num_stations, tuned)
 #         data_processor,
 #         s=2**2,
 #         linewidths=0.3,
-#         colors=["blue"],
+#         colors=["cyan"],
 #         add_legend=False,
 #         **kwargs,
 #     )
