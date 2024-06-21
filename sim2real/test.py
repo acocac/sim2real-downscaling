@@ -210,9 +210,9 @@ class Evaluator(Sim2RealTrainer):
 
         df = self.deterministic_results(self.test_set)
         sqrt_N = np.sqrt(df.shape[0])
-        mae = (df["T2M_pred"] - df["T2M_truth"]).abs().mean()
+        mae = (df["mean"] - df["VWC"]).abs().mean()
         self._set_result(tspec, "mae", mae)
-        mae_std = (df["T2M_pred"] - df["T2M_truth"]).abs().std() / sqrt_N
+        mae_std = (df["mean"] - df["VWC"]).abs().std() / sqrt_N
         self._set_result(tspec, "mae_std", mae_std)
 
         return df, nlls
