@@ -273,12 +273,12 @@ active_learning_run(e, num_stations, tuned)
 #     )
 #
 #     fig.suptitle(
-#         f"$N_{{stations}} = {num_stations}$", horizontalalignment="left", x=0.15, y=0.97
+#         f"$N_{{stations}} = {num_stations}$", horizontalalignment="left", x=0.15, y=0.97, size='x-large'
 #     )
 #     save_plot(paths.active_learning_dir, f"sensor_placement_N_stat_{num_stations}", fig=fig)
 #
 #
-# for num_stations in [20, 51]:
+# for num_stations in [20]:
 #     station_placement_plot(num_stations)
 # # %%
 # e.plot_train_val()
