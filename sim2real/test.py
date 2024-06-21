@@ -262,7 +262,8 @@ class Evaluator(Sim2RealTrainer):
     def deterministic_results_task(self, task):
         # Get temperature at all target stations on the task date.
         truth = self.get_truth(task["time"], station_ids=self.test_stations)
-        mean_ds, _ = self.model.predict(task, X_t=truth)
+        pred = self.model.predict(task, X_t=truth)
+        mean_ds = pred[self.task_loader.target_var_IDs[0][0]]['mean']
         truth.index = mean_ds.index
         return truth.join(mean_ds, lsuffix="_truth", rsuffix="_pred")
 
