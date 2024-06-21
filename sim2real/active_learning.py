@@ -86,7 +86,7 @@ def active_learning_run(e, num_stations, tuned):
         X_s=X_s,
         X_s_mask=ger_mask(X_s),
         X_t_mask=ger_mask(X_t),
-        N_new_context=5,
+        N_new_context=10,
         task_loader=test_taskset.task_loader,
     )
 
@@ -225,7 +225,7 @@ active_learning_run(e, num_stations, tuned)
 # def station_placement_plot(num_stations):
 #     t = replace(tune, num_tasks=10000, num_stations=num_stations, era5_frac=0.0)
 #     e._init_testloader(t)
-#     fig, axs, transform = init_fig(2, 5, (10, 5.0), True)
+#     fig, axs, transform = init_fig(2, 10, (17, 3.8), True)
 #
 #     for i, tuned in enumerate([False, True]):
 #         X_new_df = load_X_new_df(num_stations, tuned)
@@ -237,7 +237,7 @@ active_learning_run(e, num_stations, tuned)
 #             X_new_df,
 #             e.data_processor,
 #             transform,
-#             axs[5 * i : 5 * i + 5],
+#             axs[10 * i : 10 * i + 10],
 #             transform=transform,
 #             add_colorbar=True,
 #         )
@@ -260,7 +260,7 @@ active_learning_run(e, num_stations, tuned)
 #         fontsize=16,
 #     )
 #
-#     axs[5].text(
+#     axs[10].text(
 #         -0.07,
 #         0.55,
 #         "Finetuned",
@@ -268,7 +268,7 @@ active_learning_run(e, num_stations, tuned)
 #         ha="center",
 #         rotation="vertical",
 #         rotation_mode="anchor",
-#         transform=axs[5].transAxes,
+#         transform=axs[10].transAxes,
 #         fontsize=16,
 #     )
 #
