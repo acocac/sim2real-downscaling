@@ -197,11 +197,12 @@ class Evaluator(Sim2RealTrainer):
         # test_loader = self._init_testloader(tspec)
         self.test_loader = self._init_testloader(tspec)
 
-        if tspec.num_stations == 500 and tspec.num_tasks > 400:
-            added_var = 0
-        else:
-            # Adjust variance offfset similar to ERA5
-            added_var = 0.12
+        #if tspec.num_stations == 500 and tspec.num_tasks > 400:
+        #    added_var = 0
+        #else:
+        #    # Adjust variance offfset similar to ERA5
+        #    added_var = 0.12
+        added_var = 0
 
         nlls = self.evaluate_loglik(self.test_set, added_var=added_var)
         self._set_result(tspec, "nll", np.mean(nlls))
