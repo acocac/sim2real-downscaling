@@ -408,7 +408,7 @@ class Evaluator(Sim2RealTrainer):
             task, X_t=self.raw_aux, resolution_factor=resolution_factor
         )
 
-        mean_ds, std_ds = prediction["mean"], prediction["std"]
+        mean_ds, std_ds = prediction[self.task_loader.target_var_IDs[0][0]]["mean"], prediction[self.task_loader.target_var_IDs[0][0]]["std"]
 
         return mean_ds, std_ds
 
