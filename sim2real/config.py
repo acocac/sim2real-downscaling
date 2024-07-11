@@ -174,6 +174,19 @@ norm_params = {
     },
 }
 
+norm_params_era5 = {
+    "HEIGHT": {"method": "min_max", "params": {"max": 1245.0, "min": -6.0}},
+    "VWC": {
+        "method": "mean_std",
+        "params": {'mean': 0.3290455639362335, 'std': 0.12027376145124435},
+    },
+    "coords": {
+        "time": {"name": "time"},
+        "x1": {"map": (49.77000045776367, 60.77000045776367), "name": "LAT"},
+        "x2": {"map": (-7.550000190734863, 3.4499998092651367), "name": "LON"},
+    },
+}
+
 names = Names(
     temp="VWC",
     lat="LAT",
