@@ -165,7 +165,7 @@ norm_params = {
     "HEIGHT": {"method": "min_max", "params": {"max": 1245.0, "min": -6.0}},
     "VWC": {
         "method": "mean_std",
-        "params": {'mean': 0.3290455639362335, 'std': 0.12027376145124435},
+        "params": {'mean': 0.37885475158691406, 'std': 0.17168088257312775},
     },
     "coords": {
         "time": {"name": "time"},
