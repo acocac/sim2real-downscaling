@@ -355,7 +355,7 @@ out = OutputSpec(
 
 tune = TuneSpec(
     tuner=TunerType.naive,
-    num_stations=500,
+    num_stations=51,
     num_tasks=10000,
     val_frac_stations=0.2,
     val_frac_times=0.2,
