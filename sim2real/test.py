@@ -165,7 +165,7 @@ class Evaluator(Sim2RealTrainer):
         print(f"Loaded best ERA5 weights from {best_path}.")
         self.model.model = self.model.model.to(self.opt.device)
 
-    def evaluate_era5_baseline(self, tspec: TuneSpec, added_var=0.15):
+    def evaluate_era5_baseline(self, tspec: TuneSpec, added_var=0.0):
         self._init_weights_era5_baseline()
 
         self.test_loader = self._init_testloader(tspec)
