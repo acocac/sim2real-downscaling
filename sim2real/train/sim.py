@@ -56,9 +56,9 @@ class SimTrainer(Trainer):
 
         hi_res_aux_raw = load_elevation()
 
-        #self.aux_raw, context = self._add_aux()
-        self.aux_raw = hi_res_aux_raw.interp_like(self.var_raw, method='nearest')
-        context = 'all'
+        self.aux_raw, context = self._add_aux()
+        #self.aux_raw = hi_res_aux_raw.interp_like(self.var_raw, method='nearest')
+        #context = 'all'
         context_points.append(context)
 
         self.raw = [self.var_raw, self.aux_raw]
