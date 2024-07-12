@@ -272,7 +272,7 @@ class Trainer(ABC):
         model_kwargs = dict(
             #dim_yc=self.mspec.dim_yc,
             #dim_yt=self.mspec.dim_yt,
-            #internal_density=self.mspec.ppu,
+            internal_density=self.mspec.ppu,
             likelihood=self.mspec.likelihood,
             unet_channels=self.mspec.unet_channels,
             #encoder_scales=self.mspec.encoder_scales,
