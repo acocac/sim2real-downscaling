@@ -75,7 +75,7 @@ class ModelSpec:
     film: bool
     freeze_film: bool
     likelihood: str
-#    ppu: int
+    ppu: int
 #    dim_yt: int
 #    dim_yc: Tuple[int]
 #    encoder_scales: List[float]
@@ -323,13 +323,13 @@ tune_opt = OptimSpec(
 opt = pretrain_opt
 
 # ppu = 200  # Found from dwd.compute_ppu()
-# ppu = 119 #from internal_density in deepsensor
+ppu = 109 #from internal_density in deepsensor
 model = ModelSpec(
     unet_channels=(96,) * 6,
     aux_t_mlp_layers=(96, 96, 96),
     #dim_yt=1,
     #dim_yc=(1, 7),
-    #ppu=ppu,
+    ppu=ppu,
     film=False,  # Deprecated, doesn't do anything.
     freeze_film=True,  # Deprecated, doesn't do anything.
     likelihood="het",
