@@ -337,6 +337,7 @@ model = ModelSpec(
     #encoder_scales_learnable=False,
     #decoder_scale_learnable=False,
     use_aux_mlp=True,
+    experiment_name="era5land_uk_default"
 )
 
 out = OutputSpec(

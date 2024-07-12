@@ -25,7 +25,8 @@ def get_model_dir(m: ModelSpec):
     else:
         mlp_str = ""
 
-    return f"{paths.out}/{m.likelihood}/ppu_{m.ppu}_channels_{channel_str}{mlp_str}_dimyt_{m.dim_yt}_dim_yc_{m.dim_yc}"
+    #return f"{paths.out}/{m.likelihood}/ppu_{m.ppu}_channels_{channel_str}{mlp_str}_dimyt_{m.dim_yt}_dim_yc_{m.dim_yc}"
+    return f"{paths.out}/{m.likelihood}/exp_{m.experiment_name}"
 
 
 def exp_dir_sim(m: ModelSpec):
