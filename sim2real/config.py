@@ -84,6 +84,7 @@ class ModelSpec:
 #    decoder_scale_learnable: bool
     use_aux_mlp: bool
     aux_t_mlp_layers: Tuple[int]
+    experiment_name: str
 
 
 @dataclass
