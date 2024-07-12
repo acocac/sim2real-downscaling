@@ -75,13 +75,13 @@ class ModelSpec:
     film: bool
     freeze_film: bool
     likelihood: str
-    ppu: int
-    dim_yt: int
-    dim_yc: Tuple[int]
-    encoder_scales: List[float]
-    decoder_scale: float
-    encoder_scales_learnable: bool
-    decoder_scale_learnable: bool
+#    ppu: int
+#    dim_yt: int
+#    dim_yc: Tuple[int]
+#    encoder_scales: List[float]
+#    decoder_scale: float
+#    encoder_scales_learnable: bool
+#    decoder_scale_learnable: bool
     use_aux_mlp: bool
     aux_t_mlp_layers: Tuple[int]
 
