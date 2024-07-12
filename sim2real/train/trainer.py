@@ -270,15 +270,15 @@ class Trainer(ABC):
     def _init_model(self):
         # Construct custom model.
         model_kwargs = dict(
-            dim_yc=self.mspec.dim_yc,
-            dim_yt=self.mspec.dim_yt,
-            internal_density=self.mspec.ppu,
+            #dim_yc=self.mspec.dim_yc,
+            #dim_yt=self.mspec.dim_yt,
+            #internal_density=self.mspec.ppu,
             likelihood=self.mspec.likelihood,
             unet_channels=self.mspec.unet_channels,
-            encoder_scales=self.mspec.encoder_scales,
-            decoder_scale=self.mspec.decoder_scale,
-            encoder_scales_learnable=self.mspec.encoder_scales_learnable,
-            decoder_scale_learnable=self.mspec.decoder_scale_learnable,
+            #encoder_scales=self.mspec.encoder_scales,
+            #decoder_scale=self.mspec.decoder_scale,
+            #encoder_scales_learnable=self.mspec.encoder_scales_learnable,
+            #decoder_scale_learnable=self.mspec.decoder_scale_learnable,
             aux_t_mlp_layers=self.mspec.aux_t_mlp_layers,
         )
 

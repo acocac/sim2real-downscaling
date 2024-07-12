@@ -293,7 +293,7 @@ datager = DataSpec(
 
 pretrain_opt = OptimSpec(
     seed=42,
-    device="cuda",
+    device="cpu",
     batch_size=16,
     batch_size_val=512,
     batches_per_epoch=200,
@@ -322,20 +322,20 @@ tune_opt = OptimSpec(
 opt = pretrain_opt
 
 # ppu = 200  # Found from dwd.compute_ppu()
-ppu = 119 #from internal_density in deepsensor
+# ppu = 119 #from internal_density in deepsensor
 model = ModelSpec(
     unet_channels=(96,) * 6,
     aux_t_mlp_layers=(96, 96, 96),
-    dim_yt=1,
-    dim_yc=(1, 7),
-    ppu=ppu,
+    #dim_yt=1,
+    #dim_yc=(1, 7),
+    #ppu=ppu,
     film=False,  # Deprecated, doesn't do anything.
     freeze_film=True,  # Deprecated, doesn't do anything.
     likelihood="het",
-    encoder_scales=[1 / ppu, 1 / ppu],
-    decoder_scale=1 / ppu,
-    encoder_scales_learnable=False,
-    decoder_scale_learnable=False,
+    #encoder_scales=[1 / ppu, 1 / ppu],
+    #decoder_scale=1 / ppu,
+    #encoder_scales_learnable=False,
+    #decoder_scale_learnable=False,
     use_aux_mlp=True,
 )
 
