@@ -70,6 +70,7 @@ test_taskset, _ = e._init_testloader(t)
 
 test_stations_df = e.dwd_raw.meta_df[e.dwd_raw.meta_df.STATION_ID.isin(e.test_stations)]
 stn_locs_df = test_stations_df.set_index(['LAT', 'LON'])
+stn_locs_df = stn_locs_df[stn_locs_df.TO_DATE.dt.year >= 2012]
 
 X_t = stn_locs_df
 X_s = e.raw_aux.coarsen({"LAT": 15, "LON": 15}, boundary="trim").mean()
@@ -93,8 +94,8 @@ greedy_alg = GreedyAlgorithm(
 )
 
 ## create tasks
-tyear = 2022
-test_dates = [e.test_set[i]['time'] for i in range(len(e.test_set)) if e.test_set[i]['time'].year == tyear]
+tyear = [2013, 2014]
+test_dates = [e.test_set[i]['time'] for i in range(len(e.test_set)) if e.test_set[i]['time'].year not in tyear]
 
 test_tasks = test_taskset.task_loader(test_dates, ('all', 'all'), 'all')
 
